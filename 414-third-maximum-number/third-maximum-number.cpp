@@ -8,20 +8,17 @@ public:
 
         for(auto ele : nums) {
             // 2. Skip duplicates immediately
-            if (ele == first || ele == second || ele == third) {
-                continue;
-            }
-
+        
             if(ele > first) {
                 third = second;
                 second = first;
                 first = ele;
             }
-            else if(ele > second) { // ele != first is already guaranteed
+            else if(ele > second && ele < first) { // ele != first is already guaranteed
                 third = second;
                 second = ele;
             }
-            else if(ele > third) {  // ele != second is already guaranteed
+            else if(ele > third && ele < second) {  // ele != second is already guaranteed
                 third = ele;
             }
         }
