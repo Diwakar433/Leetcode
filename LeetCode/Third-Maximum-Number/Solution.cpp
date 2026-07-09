@@ -8,29 +8,26 @@
 8
 9        for(auto ele : nums) {
 10            // 2. Skip duplicates immediately
-11            if (ele == first || ele == second || ele == third) {
-12                continue;
-13            }
-14
-15            if(ele > first) {
-16                third = second;
-17                second = first;
-18                first = ele;
-19            }
-20            else if(ele > second) { // ele != first is already guaranteed
-21                third = second;
-22                second = ele;
+11        
+12            if(ele > first) {
+13                third = second;
+14                second = first;
+15                first = ele;
+16            }
+17            else if(ele > second && ele < first) { // ele != first is already guaranteed
+18                third = second;
+19                second = ele;
+20            }
+21            else if(ele > third && ele < second) {  // ele != second is already guaranteed
+22                third = ele;
 23            }
-24            else if(ele > third) {  // ele != second is already guaranteed
-25                third = ele;
-26            }
-27        }
-28        
-29        // If third was never updated, a 3rd distinct max doesn't exist
-30        if(third == LLONG_MIN)
-31            return first;
-32            
-33        return third;
-34    }
-35};
-36
+24        }
+25        
+26        // If third was never updated, a 3rd distinct max doesn't exist
+27        if(third == LLONG_MIN)
+28            return first;
+29            
+30        return third;
+31    }
+32};
+33
