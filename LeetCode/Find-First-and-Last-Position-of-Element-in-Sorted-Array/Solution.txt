@@ -1,0 +1,50 @@
+1class Solution {
+2public:
+3    void first_true(vector<int>& nums, int target, vector<int> &ans) {
+4        int low = 0, high = nums.size()-1;
+5        
+6        while(low < high) {
+7            
+8            int mid = low + (high-low)/2;
+9            
+10            if(nums[mid] >= target)
+11                high = mid;
+12            else
+13                low = mid+1;
+14        }
+15        if(nums[low] != target)
+16            ans.push_back(-1);
+17        else
+18            ans.push_back(low);
+19    }
+20    void last_false(vector<int>& nums, int target, vector<int> &ans) {
+21        
+22        int low = 0, high = nums.size()-1;
+23        
+24        while(low < high) {
+25            
+26            int mid = low + (high-low+1)/2;
+27            
+28            if(nums[mid] > target)
+29                high = mid-1;
+30            else
+31                low = mid;
+32        }
+33        if(nums[low] != target)
+34            ans.push_back(-1);
+35        else
+36            ans.push_back(low);
+37    }
+38public:    
+39    vector<int> searchRange(vector<int>& nums, int target) {
+40        vector<int> ans;
+41        
+42        if(nums.size() == 0)
+43            return {-1, -1};
+44        first_true(nums, target, ans);
+45        last_false(nums, target, ans);
+46        
+47        
+48        return ans;
+49    }
+50};
