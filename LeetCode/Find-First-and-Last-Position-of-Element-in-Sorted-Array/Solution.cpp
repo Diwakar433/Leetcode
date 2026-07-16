@@ -1,50 +1,25 @@
 1class Solution {
-2public:
-3    int first_true(vector<int>& nums, int target) {
-4        int low = 0, high = nums.size()-1;
-5        
-6        while(low < high) {
-7            
-8            int mid = low + (high-low)/2;
-9            
-10            if(nums[mid] >= target)
-11                high = mid;
-12            else
-13                low = mid+1;
-14        }
-15        if(nums[low] != target)
-16            return -1;
-17        
-18        return low;
-19    }
-20    int last_false(vector<int>& nums, int target) {
-21        
-22        int low = 0, high = nums.size()-1;
-23        
-24        while(low < high) {
-25            
-26            int mid = low + (high-low+1)/2;
-27            
-28            if(nums[mid] > target)
-29                high = mid-1;
-30            else
-31                low = mid;
-32        }
-33        if(nums[low] != target)
-34            return -1;
-35        
-36        return low;
-37    }
-38public:    
-39    vector<int> searchRange(vector<int>& nums, int target) {
-40     
-41        if(nums.size() == 0)
-42            return {-1, -1};
-43        
-44        int x = first_true(nums, target);
-45        int y = last_false(nums, target);
-46        
-47        
-48        return {x, y};
-49    }
-50};
+2    public int[] searchRange(int[] nums, int target) {
+3        int []arr = new int[2];
+4         if(nums.length==1 && nums[0]==target){
+5            /*if length of given array is 1 and the target is present at
+6            the 0th index then return {0,0} array.*/
+7           arr[0]=0;
+8           arr[1]=0;
+9            return arr ;
+10        }
+11        ArrayList<Integer> li = new ArrayList<>();
+12        for(int i = 0;i<nums.length;i++){
+13            if(nums[i]==target)
+14            li.add(i);
+15        }
+16        if(li.size()==0){
+17            arr[0]=-1;
+18            arr[1]=-1;
+19            return arr;
+20        }
+21        arr[0]= li.get(0);
+22        arr[1]=li.get(li.size()-1);
+23        return arr;
+24    }
+25}
